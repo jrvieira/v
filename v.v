@@ -1,3 +1,19 @@
+[# TODO
+ consider: if type constructors cant have single letter names
+ there is no need for:
+ func [a b c d]<- a:a b:b c:c d:d
+ ...
+
+ nor for shadowing when declaring a type:
+ maybe a
+  :nothing
+  :just [a]<- cant shadow an existing type
+
+ consider: parenthesise class constraints for clarity:
+ range (Eq Ord a) from:a to:a :list a
+
+]
+
 # this is a comment
 
 # this is a multiline comment
@@ -208,7 +224,8 @@ type a
  :data a
  :data' a
 
-# classes
+# CLASSES
+
 Eq a
  eq x:a y:a
   not , ineq x y
@@ -218,7 +235,8 @@ Eq a
 .syn 'eq =
 .syn 'ineq !
 
-# class instance
+# CLASS INSTANCE
+
 Eq type
  eq x y
   x:data y:data
@@ -228,7 +246,11 @@ Eq type
   _
    :false
 
-# record-like syntax for types
+# SUB-CLASS (a must be Eq before its Ord)
+Ord Eq a
+ ...
+
+# RECORD-LIKE SYNTAX FOR TYPES
 
 any
  :any get_any:bool
