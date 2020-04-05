@@ -41,7 +41,7 @@ range Eq Ord a from:a to:a :list a
 # comma (,) is equivalent to $ in haskell
 
 run :io nil
- print , seven arr:elem (:list 1 .. 7) # :true
+ print , seven 'elem (range 1 7) # :true
 
 # types
 
