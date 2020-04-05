@@ -163,7 +163,7 @@ Ord a
 
 # 'f = infix
 test :bool
- 7 'elem 1 : 2 : 3 : \ # :true
+ 7 'elem (1 : 2 : 3 : \) # :true
 
 not b:bool
 b:true
