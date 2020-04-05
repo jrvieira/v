@@ -1,35 +1,62 @@
 # this is a comment
 
 # this is a multiline comment
- ended by an empty line
+ ended by deindentation
 
-.i base # .import base
+ empty lines are permitted # and comments can be
+  nested like this
+  second level
+ first level
+
+# IMPORT
+.i base
+
+[# INCLUSIVE
 .i data.array
  :array
  length
  elem
-.i data.arrow
+# EXCLUSIVE
+.e data.arrow
+ ->
+]
 
-.r run # .run the function run
-
-# values
-seven :int
- 7
+# RUN
+.r run
+.r echo "ok"
 
 #
- function syntax
+ DEFINITIONS
+ name [[constraint]* generic]* [arg:type]* :type
+ [match]
+  code
+  [
+  clause]*
+ \n
+#
+ EXAMPLE
  g = generic type variable
  C = class constraint
  a = argument identifier
  t = argument type (possible a)
  r = return type
 
-fname g1 C1 C2 g2 a1:t1 a2:t2 :r
-[match] # matches can be nested
- result
+ fname g1 C1 C2 g2 a1:t1 a2:t2 :r
+ [match] # matches can be nested
+  result
+
 
 id a a:a :a
  a
+
+# INFIX AND SYNONYMS
+ 'f - infix f
+ infix functions can be of the form
+  '[letter]+
+  [symbol] # requires .syn
+
+.syn echo print
+.syn 'if ?
 
 range Eq Ord a from:a to:a :list a
  from = to ? \ ,
@@ -41,9 +68,9 @@ range Eq Ord a from:a to:a :list a
 # comma (,) is equivalent to $ in haskell
 
 run :io nil
- print , seven 'elem (range 1 7) # :true
+ print , seven 'elem (1 .. 7) # :true
 
-# types
+# TYPES
 
 void
 
@@ -70,18 +97,13 @@ list a
  :node a (list a)
 
 .syn ':node :
+.syn :empty \ # nullary functions can also have symbol synonyms
 
-.syn :empty \
+# UNNAMED VARIABLES (_)
 
-fst a p:pair a _ :a
+fst a p:pair a b :a
 p:pair a _
  a
-
-zero x:int :bool
- x = 0
-
-natural x:int :bool
- x > -1
 
 head a l:list a :will (list a)
 l\
@@ -123,7 +145,7 @@ l '(x : xx : xs)
 
 fibs n:int :int
  go 0 1 n
- .
+
  go 'a:int 'b:int n:int :int
   n = 0 ? a , go b (a + b) (n - 1)
 
@@ -132,8 +154,6 @@ p:true
  x
 p:false
  y
-
-.syn 'if ?
 
 elem a el:a l:list a :bool
 l\ # same as l:empty
@@ -161,7 +181,12 @@ Ord a
 .syn 'lt <
 .syn 'gt >
 
-# 'f = infix
+zero x:int :bool
+ x = 0
+
+natural x:int :bool
+ x > -1
+
 test :bool
  7 'elem (1 : 2 : 3 : \) # :true
 
