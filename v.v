@@ -1,4 +1,5 @@
 [# TODO
+
  consider: if type constructors cant have single letter names
  there is no need for:
  func [a b c d]<- a:a b:b c:c d:d
@@ -11,6 +12,26 @@
 
  consider: parenthesise class constraints for clarity:
  range (Eq Ord a) from:a to:a :list a
+
+ refused: remove : from function return type doesnt work:
+ cons head:a tail:list a :list a <- : removing : would cause ambiguity
+  :node head (tail)
+
+ $ .t :some 7
+ > (Num a) :will a
+ 
+ refused: lowercase class names incompatible with:
+ eq a <- is this a class or type declaration?
+  ...
+
+ note: homonym functions with different type signatures are allowed:
+ # pow int -> int -> int and pow int -> double -> double
+  are tow different functions
+ pow x:int e:int :int
+  e = 0 ? 1 , x * (pow 3 (e - 1))
+
+ pow x:int x:double :double
+  ...
 
 ]
 
@@ -77,7 +98,7 @@ id a a:a :a
 range Eq Ord a from:a to:a :list a
  from = to ? \ ,
  from < to ? :list a (range (succ from) to) ,
- from > to ? :list a (range (pred from) to)
+ :list a (range (pred from) to)
 
 .syn range ..
 
@@ -227,9 +248,9 @@ type a
 # CLASSES
 
 Eq a
- eq x:a y:a
+ eq x:a y:a :bool
   not , ineq x y
- ineq x:a y:a
+ ineq x:a y:a :bool
   not , eq x y
 
 .syn 'eq =
@@ -238,7 +259,7 @@ Eq a
 # CLASS INSTANCE
 
 Eq type
- eq x y
+ eq x:type y:type :bool <- types needed because class can contain homonym functions that work differently for different types (ex: pow x:int y:double)
   x:data y:data
    :true
   x:data' y:data'
