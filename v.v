@@ -33,6 +33,13 @@
  pow x:int x:double :double
   ...
 
+ note: there is no support for pointfree, there is for partial application     as all functions are curried:
+ mappend x:list a y:list a :list a
+  concat x y # not just concat
+ 
+ map (1 +) (0 : 1 : 2 : \) # (1 : 2 : 3 : \)
+       ^ partial application
+
 ]
 
 # this is a comment
@@ -147,6 +154,15 @@ l\
  :none
 l(x : _)
  :some x
+
+# lets rewrite the last couple of functions in inline style:
+
+fst a p:pair a b :a
+p:pair a _ a # this is not best
+
+head a l:list a :will (list a)
+l\ :none
+l(x : _) :some x
 
 tail a l:list a :will (list a)
 l\

@@ -1,0 +1,1 @@
+{"rustc":17802287365826114509,"features":"[]","target":17010383983365893491,"profile":2574335274271406459,"path":11993485878574342755,"deps":[[11088550098062310304,"rand",false,3133404230496879107]],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/zipf-a3a5313fafef272f/dep-bin-zipf-a3a5313fafef272f"}}],"rustflags":[],"metadata":1991661825041697655}
